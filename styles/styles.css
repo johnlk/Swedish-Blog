@@ -1,78 +1,110 @@
 body {
-    padding: 15px;
+	margin: 0;
+	padding: 0;
+}
+#app {
+	max-width: 75%;
+	margin: 0 auto;
 }
 #main_header {
-    font-size: 50px;
-    text-align: center;
+	font-size: 50px;
+	text-align: center;
 }
 #main_image {
-    max-width: 95%;
-    display: block;
-    margin: 5px auto;
+	max-width: 100%;
+	height: auto;
+	display: block;
+	margin: 5px auto;
 }
 #quick_links {
-    text-align: center;
+	text-align: center;
 }
-#quick_links > a {
-    margin: 0 5px;
+#quick_links>a {
+	margin: 0 5px;
 }
 #blog_explanation {
-    width: 80%;
-    margin: 50px auto;
+	margin: 50px 0;
 }
-#post_links {
-
+#post_links h5 {
+	margin-top: 15px;
 }
-#post_links > h1 {
-
-}
-#post_links > a {
-    margin: 0 10px;
+#post_links>a {
+	display: block;
+	margin: 0 10px;
 }
 .post {
-    margin: 10px auto;
+	margin: 10px auto;
 }
 .post_header {
-    font-size: 25px;
+	font-size: 25px;
 }
 .post_image {
-    display: block;
-    max-width: 80%;
-    margin: 0 auto;
+	display: block;
+	max-width: 80%;
+	margin: 0 auto;
 }
-.post > p {
-    margin: 20px auto;
-    width: 90%;
+.post>p {
+	margin: 20px auto;
+	width: 90%;
 }
-
 .bottom-links a:nth-child(2) {
-  float: right;
+	float: right;
 }
+/* jssor slider loading skin spin css */
 
-
-/*jssor slider loading skin spin css*/
 .jssorl-009-spin img {
-    animation-name: jssorl-009-spin;
-    animation-duration: 1.6s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
+	animation-name: jssorl-009-spin;
+	animation-duration: 1.6s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
 }
-
 @keyframes jssorl-009-spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
 }
+/* jssor slider bullet skin 051 css */
 
-/*jssor slider bullet skin 051 css*/
-.jssorb051 .i {position:absolute;cursor:pointer;}
-.jssorb051 .i .b {fill:#fff;fill-opacity:0.5;}
-.jssorb051 .i:hover .b {fill-opacity:.7;}
-.jssorb051 .iav .b {fill-opacity: 1;}
-.jssorb051 .i.idn {opacity:.3;}
+.jssorb051 .i {
+	position: absolute;
+	cursor: pointer;
+}
+.jssorb051 .i .b {
+	fill: #fff;
+	fill-opacity: 0.5;
+}
+.jssorb051 .i:hover .b {
+	fill-opacity: 0.7;
+}
+.jssorb051 .iav .b {
+	fill-opacity: 1;
+}
+.jssorb051 .i.idn {
+	opacity: 0.3;
+}
+/* jssor slider arrow skin 051 css */
 
-/*jssor slider arrow skin 051 css*/
-.jssora051 {display:block;position:absolute;cursor:pointer;}
-.jssora051 .a {fill:none;stroke:#fff;stroke-width:360;stroke-miterlimit:10;}
-.jssora051:hover {opacity:.8;}
-.jssora051.jssora051dn {opacity:.5;}
-.jssora051.jssora051ds {opacity:.3;pointer-events:none;}
+.jssora051 {
+	display: block;
+	position: absolute;
+	cursor: pointer;
+}
+.jssora051 .a {
+	fill: none;
+	stroke: #fff;
+	stroke-width: 360;
+	stroke-miterlimit: 10;
+}
+.jssora051:hover {
+	opacity: 0.8;
+}
+.jssora051.jssora051dn {
+	opacity: 0.5;
+}
+.jssora051.jssora051ds {
+	opacity: 0.3;
+	pointer-events: none;
+}
