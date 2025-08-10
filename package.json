@@ -1,8 +1,8 @@
 {
   "scripts": {
-    "dev": "serve ."
+    "dev": "serve . --single"
   },
   "devDependencies": {
-    "serve": "^14.2.0"
+    "serve": "14.2.4"
   }
 }
