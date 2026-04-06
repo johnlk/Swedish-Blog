@@ -1,23 +1,44 @@
 # Swedish Blog
 
-Welcome to the repository for my Swedish blog! This site contains articles and updates about my study abroad experiences in Sweden in 2018. The blog is made up of static pages and is hosted on GitHub Page's Content Delivery Network (CDN).
+A blog documenting my study abroad semester in Uppsala, Sweden in 2018. Built with [Astro](https://astro.build) and deployed to GitHub Pages.
 
-## Viewing the Blog
+**Live site:** [johnlk.github.io/Swedish-Blog](https://johnlk.github.io/Swedish-Blog)
 
-You can access the blog by following this link: [Swedish Blog](https://johnlk.github.io/Swedish-Blog)
+## Tech Stack
 
-## Following My Current Work
+- **Astro 6** -- static site generator with content collections
+- **Bun** -- package manager and script runner
+- **Markdown** -- blog posts as `.md` files with frontmatter
+- **Vanilla CSS** -- modern CSS Grid, zero frameworks
+- **GitHub Actions** -- automated build and deploy on push to `main`
 
-For updates and insights into my latest work, the best place to follow me is on my [Twitter profile](https://twitter.com/johnkuhn58). I frequently share about my current projects, thoughts on various tech topics, and other interesting tidbits.
+## Project Structure
 
-## Running the Blog Locally
+```
+src/
+  content/posts/     19 blog posts as Markdown
+  components/        Gallery (with lightbox), PostNav
+  layouts/           BaseLayout (shared HTML shell)
+  pages/             Home, Gallery, dynamic post routes
+  styles/            Global stylesheet
+public/images/       Trip photos
+.github/workflows/   CI/CD pipeline
+```
 
-If you'd like to run the blog on your local machine, follow these steps:
+## Running Locally
 
-1. Clone the repository to your local machine.
-2. Navigate to the project directory in your terminal.
-3. Run the command `npm run dev`.
+```sh
+bun install
+bun run dev
+```
 
-This will start a local development server. You can then view the blog in your web browser by navigating to the local host address specified in your terminal.
+## Building
 
-Thank you for your interest in my Swedish study abroad blog! Don't hesitate to reach out if you have any questions.
+```sh
+bun run build    # outputs to dist/
+bun run preview  # preview the build locally
+```
+
+## Deployment
+
+Pushes to `main` automatically trigger the GitHub Actions workflow which builds the site and deploys to GitHub Pages.
