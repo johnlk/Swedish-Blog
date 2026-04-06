@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostNav from '../../components/PostNav.astro';
+import Gallery from '../../components/Gallery.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { title, date, image, video, gallery, prevPost, nextPost } = post.data;
+const base = import.meta.env.BASE_URL;
+
+// Resolve image path: if it's a filename, prepend base+images/
+function resolveImage(src: string | undefined) {
+  if (!src) return undefined;
+  if (src.startsWith('http')) return src;
+  return `${base}images/${src}`;
+}
+
+const heroImage = resolveImage(image);
+
+const formattedDate = new Date(date).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={`${title} - Swedish Blog`} image={heroImage}>
+  <article>
+    <div class="post-header">
+      <h2>{title}</h2>
+      <time class="post-date" datetime={date}>{formattedDate}</time>
+    </div>
+
+    {video && (
+      <video autoplay muted loop preload="auto" class="post-video" controls>
+        <source src={video} type="video/mp4" />
+        Your browser does not support this video.
+      </video>
+    )}
+
+    {heroImage && !video && (
+      <img class="post-hero" src={heroImage} alt={title} />
+    )}
+
+    {gallery && gallery.length > 0 && (
+      <Gallery images={gallery} />
+    )}
+
+    <div class="post-content">
+      <Content />
+    </div>
+  </article>
+
+  <PostNav prevPost={prevPost} nextPost={nextPost} />
+</BaseLayout>
