@@ -1,14 +1,9 @@
 # dependencies
 node_modules
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
-.pnp.*
-.npm
-web_modules/
+
+# astro
+dist/
+.astro/
 
 # misc
 *.DS_Store
@@ -17,8 +12,6 @@ web_modules/
 .env
 .env.local
 .env.*.local
-.envrc
 
-# Logs
-logs
+# logs
 *.log

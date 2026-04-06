@@ -1,0 +1,86 @@
+---
+interface Props {
+  images: string[];
+  basePath?: string;
+}
+
+const base = import.meta.env.BASE_URL;
+const { images, basePath = `${base}images/` } = Astro.props;
+---
+
+<div class="gallery-grid" data-gallery>
+  {images.map((img, i) => (
+    <a href={`${basePath}${img}`} data-gallery-index={i}>
+      <img src={`${basePath}${img}`} alt={`Trip photo ${i + 1}`} loading="lazy" />
+    </a>
+  ))}
+</div>
+
+<!-- Lightbox overlay -->
+<div class="lightbox-overlay" id="lightbox">
+  <button class="lightbox-close" aria-label="Close">&times;</button>
+  <button class="lightbox-nav lightbox-prev" aria-label="Previous">&lsaquo;</button>
+  <img src="" alt="" />
+  <button class="lightbox-nav lightbox-next" aria-label="Next">&rsaquo;</button>
+</div>
+
+<script>
+  function initLightbox() {
+    const overlay = document.getElementById('lightbox');
+    if (!overlay) return;
+
+    const overlayImg = overlay.querySelector('img')!;
+    const galleries = document.querySelectorAll('[data-gallery]');
+    let currentImages: string[] = [];
+    let currentIndex = 0;
+
+    function open(images: string[], index: number) {
+      currentImages = images;
+      currentIndex = index;
+      overlayImg.src = currentImages[currentIndex];
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function close() {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function navigate(dir: number) {
+      currentIndex = (currentIndex + dir + currentImages.length) % currentImages.length;
+      overlayImg.src = currentImages[currentIndex];
+    }
+
+    galleries.forEach((gallery) => {
+      const links = gallery.querySelectorAll('a[data-gallery-index]');
+      const images = Array.from(links).map((a) => (a as HTMLAnchorElement).href);
+
+      links.forEach((link, i) => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          open(images, i);
+        });
+      });
+    });
+
+    overlay.querySelector('.lightbox-close')!.addEventListener('click', close);
+    overlay.querySelector('.lightbox-prev')!.addEventListener('click', () => navigate(-1));
+    overlay.querySelector('.lightbox-next')!.addEventListener('click', () => navigate(1));
+
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) close();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!overlay.classList.contains('active')) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') navigate(-1);
+      if (e.key === 'ArrowRight') navigate(1);
+    });
+  }
+
+  // Run on initial load and on Astro page transitions
+  initLightbox();
+  document.addEventListener('astro:after-swap', initLightbox);
+</script>

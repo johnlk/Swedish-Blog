@@ -1,0 +1,25 @@
+---
+interface Props {
+  prevPost?: string | null;
+  nextPost?: string | null;
+}
+
+const { prevPost, nextPost } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<nav class="post-nav">
+  {prevPost ? (
+    <a href={`${base}posts/${prevPost}/`}>&larr; Previous Post</a>
+  ) : (
+    <span></span>
+  )}
+
+  <a href={`${base}`} class="back-home">Home</a>
+
+  {nextPost ? (
+    <a href={`${base}posts/${nextPost}/`}>Next Post &rarr;</a>
+  ) : (
+    <span></span>
+  )}
+</nav>
