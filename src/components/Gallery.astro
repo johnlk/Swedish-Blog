@@ -38,12 +38,12 @@ const { images, basePath = `${base}images/` } = Astro.props;
       currentImages = images;
       currentIndex = index;
       overlayImg.src = currentImages[currentIndex];
-      overlay.classList.add('active');
+      overlay?.classList.add('active');
       document.body.style.overflow = 'hidden';
     }
 
     function close() {
-      overlay.classList.remove('active');
+      overlay?.classList.remove('active');
       document.body.style.overflow = '';
     }
 
